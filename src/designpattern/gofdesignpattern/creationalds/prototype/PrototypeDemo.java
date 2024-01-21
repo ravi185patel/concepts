@@ -1,4 +1,4 @@
-package designpattern;
+package designpattern.gofdesignpattern.creationalds.prototype;
 
 import java.util.*;
 abstract class Color implements Cloneable{
@@ -36,9 +36,9 @@ class BlackColor extends Color{
     }
     
 }
-class ColorStore{
-    private static Map<String,Color> colorMap=
-        new HashMap<String,Color>();
+class ColorStore{ // registory
+    private static Map<String,Color> colorMap=new HashMap<String,Color>();
+
     static{
         colorMap.put("blue",new BlueColor());
         colorMap.put("black",new BlackColor());
