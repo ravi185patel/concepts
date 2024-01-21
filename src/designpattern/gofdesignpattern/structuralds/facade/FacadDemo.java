@@ -1,4 +1,4 @@
-package designpattern;
+package designpattern.gofdesignpattern.structuralds.facade;
 
 interface Shape{
     public String draw();
