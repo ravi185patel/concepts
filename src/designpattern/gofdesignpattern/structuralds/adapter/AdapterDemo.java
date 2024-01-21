@@ -1,4 +1,4 @@
-package designpattern;
+package designpattern.gofdesignpattern.structuralds.adapter;
 
 interface ShapeDemo{
     public void draw(int x, int y, int z, int j);

@@ -1,4 +1,4 @@
-package designpattern;
+package designpattern.gofdesignpattern.creationalds.builder;
 
 class Cake{
     private final double sugar;   //cup

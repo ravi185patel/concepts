@@ -1,0 +1,20 @@
+
+Proxy pattern used
+1] in transaction mgmt in spring boot and also in JPA(hibernet)
+2] Fillters.
+
+It is not as same as given in spring boot it will give you rough idea how it will
+work.
+
+How ?
+-> Transaction wrapper around object.
+ex:
+boolea transaction(Transaction transaction){
+
+    transaction.start();
+
+    transaction.get().save();
+
+    transaction.commit();
+    transaction.cloes();
+}
