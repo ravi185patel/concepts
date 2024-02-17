@@ -1,6 +1,6 @@
 package designpattern.gofdesignpattern.creationalds.builder;
 
-class Cake{
+final class Cake{
     private final double sugar;   //cup
     private final double butter;  //cup
     private final int eggs;

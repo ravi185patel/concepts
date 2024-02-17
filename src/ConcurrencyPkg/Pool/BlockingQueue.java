@@ -2,7 +2,8 @@ package ConcurrencyPkg.Pool;
 
 import java.util.LinkedList;
 import java.util.Queue;
-
+//https://www.baeldung.com/java-producer-consumer-problem
+//https://www.cesarsotovalero.net/blog/the-producer-consumer-pattern-in-java-made-easy.html#:~:text=The%20Producer%20collects%20the%20data,the%20whole%20process%20as%20desired.
 public class BlockingQueue <Type> {
     private Queue<Type> queue = new LinkedList<Type>();
     private int EMPTY = 0;

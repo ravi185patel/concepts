@@ -7,6 +7,40 @@ import java.util.stream.IntStream;
 import java.util.stream.Stream;
 import java.util.Map;
 
+class Book {
+    private String title;
+    private String author;
+    
+    private String year;
+
+    public Book(String title, String author,String year) {
+        this.title = title;
+        this.author = author;
+        this.year = year;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public String getAuthor() {
+        return author;
+    }
+
+    public String getYear() {
+        return year;
+    }
+
+    public void setYear(String year) {
+        this.year = year;
+    }
+
+    @Override
+    public String toString() {
+        return "Book [title=" + title + ", author=" + author +", year="+ year +"]";
+    }
+
+}
 public class StreamDemo {
     public static void main(String[] args) {
         ArrayList<Integer> l1 = new ArrayList<Integer>();
@@ -58,5 +92,30 @@ public class StreamDemo {
         /* convert stream into map*/ 
         Map<Integer,Integer> mapc=lstInt.stream().collect(Collectors.toMap(i->i, i->i*i));
         System.out.println(mapc);
+
+
+        List<Book> books = new ArrayList<>();
+
+        books.add(new Book("Java", "James Gosling","2000"));
+        books.add(new Book("C++", "Bjourn Stroustup","2000"));
+        books.add(new Book("C", "Denish Ritche","2000"));
+        books.add(new Book("Database", "C J Date","2001"));
+        books.add(new Book("Java", "James Gosling","2000"));
+        books.add(new Book("C", "Yashavant Kanetkar","2001"));
+
+        Map<String, List<Book>> bookMap = books.stream().collect(Collectors.groupingBy(Book::getTitle));
+
+        bookMap.forEach((k, v) -> System.out.println(k + " => " + v));
+
+        bookMap = books.stream().collect(Collectors.groupingBy(Book::getYear));
+
+        bookMap.forEach((k, v) -> System.out.println(k + " => " + v));
+
+        List<Book> lst= books.stream().filter(book -> book.getYear().equalsIgnoreCase("2000")).collect(Collectors.toList());
+
+        System.out.println(lst.toString());
+
+        Map<String, Map<String, Long>> bookMapS = books.stream().collect(Collectors.groupingBy(Book::getYear,Collectors.groupingBy(Book::getTitle,Collectors.counting())));
+        System.out.println(bookMapS.toString());
     }
 }

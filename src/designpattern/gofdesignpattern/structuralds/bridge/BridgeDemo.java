@@ -5,9 +5,14 @@ enum AccountType{
     SAVING,CURRENT;
 }
 
-interface Bank{
+abstract class Bank{
+    Account account;
 
-    public String getBankName();
+    public Bank(Account account) {
+        this.account = account;
+    }
+
+    public abstract String getBankName();
 }
 
 interface  Account{
@@ -57,13 +62,12 @@ class Current implements Account{
 }
 
 
-class IcIcBank implements Bank{
+class IcIcBank extends Bank {
     String name;
-    Account account;
 
     public IcIcBank(String name, Account account) {
+        super(account);
         this.name = name;
-        this.account = account;
     }
 
     @Override
@@ -80,13 +84,12 @@ class IcIcBank implements Bank{
     }
 }
 
-class HdfcBank implements Bank{
+class HdfcBank extends Bank {
     String name;
-    Account account;
 
     public HdfcBank(String name, Account account) {
+        super(account);
         this.name = name;
-        this.account = account;
     }
 
     @Override

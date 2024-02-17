@@ -44,5 +44,9 @@ public class InterfaceNewMethod {
     public static void main(String[] args) {
         Car car = new Sadden();
         System.out.println(car.getName() + " " + car.getType() + " " + car.get());
+
+        Runnable r = Sadden::new;
+        Thread thread = new Thread(r);
+        thread.start();
     }
 }

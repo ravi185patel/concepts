@@ -182,7 +182,7 @@ class ConnectionsFacade implements ConnectionPools{
 public class FacadeDemo {
     public static void main(String[] args) {
         DataSource orcle = new Oracle();
-        DataSource mysql = new Oracle();
+        DataSource mysql = new MqSQL();
 
         ConnectionPools connectionPools = new ConnectionsFacade();
 
@@ -190,7 +190,7 @@ public class FacadeDemo {
         oracleConnection.open();
         oracleConnection.close();
 
-        Connections mysqlConnection = connectionPools.getOracleConnection(mysql);
+        Connections mysqlConnection = connectionPools.getMysqlConnection(mysql);
         mysqlConnection.open();
         mysqlConnection.close();
     }
