@@ -36,6 +36,7 @@ public class ReentrantLockDemo {
         // Since Counter needs a lock to protect its getCount() method
         // we are giving it a ReentrantLock.
         final Counter myCounter = new Counter(new ReentrantLock());
+        final Counter myCounter1 = new Counter(new ReentrantLock());
 
         /*
         1. Instead of sharing a lock, they provide different locks to each thread.
@@ -55,14 +56,24 @@ public class ReentrantLockDemo {
             }
         };
 
+        Runnable r1 = new Runnable() {
+            @Override
+            public void run() {
+                System.out.printf("Count at thread %s is %d %n",
+                        Thread.currentThread().getName(), myCounter1.getCount());
+            }
+        };
+
         // Creating three threads
         Thread t1 = new Thread(r, "T1");
         Thread t2 = new Thread(r, "T2");
         Thread t3 = new Thread(r, "T3");
+        Thread t4 = new Thread(r1, "T4");
 
         //starting all threads
         t1.start();
         t2.start();
         t3.start();
+        t4.start();
     }
 }
