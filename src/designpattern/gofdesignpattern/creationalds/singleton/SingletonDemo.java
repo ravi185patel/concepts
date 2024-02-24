@@ -1,7 +1,20 @@
 package designpattern.gofdesignpattern.creationalds.singleton;
 
 import java.io.Serializable;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
 
+
+class DataSource implements  Serializable{
+
+}
+
+class Connection implements Cloneable{
+
+    public Object clone() throws CloneNotSupportedException {
+        return super.clone();
+    }
+}
 enum DatabaseEnum {
 
     INSTANCE;
@@ -11,7 +24,7 @@ enum DatabaseEnum {
     }
 }
 
-final class Database  implements Serializable {
+final class Database extends Connection implements Serializable {
 
     // The field must be declared volatile so that double check lock would work correctly.
     // We have declared the obj volatile which ensures that multiple threads offer the obj variable correctly
@@ -23,7 +36,7 @@ final class Database  implements Serializable {
     // This way, all threads see the same value for the volatile variable.
     private static volatile Database database;
 
-    private Database(){
+    private Database(){ // private will also secure to create object from reflection api
     }
 
 
@@ -52,7 +65,46 @@ final class Database  implements Serializable {
     }
 
 
+    public Object clone() throws CloneNotSupportedException {
+        throw new CloneNotSupportedException("Clone not supported ");
+//         return instance; //which return same instance if you don't want to raise exception;
+    }
+
+    protected Object readResolve() { return database; }  // which return same instance when we try to deserialize it.
 
 }
 public class SingletonDemo {
+
+    public static void main(String[] args) throws ClassNotFoundException, NoSuchMethodException, InvocationTargetException, InstantiationException, IllegalAccessException, CloneNotSupportedException {
+        /*Class<?> database = Class.forName("designpattern.gofdesignpattern.creationalds.singleton.Database");
+        Constructor<?> cons1 = database.getConstructor();
+//        Constructor<?> cons2 = birdClass.getConstructor(String.class);
+//        Constructor<?> cons3 = birdClass.getConstructor(String.class,boolean.class);
+
+        Database database1 = (Database) cons1.newInstance();
+        System.out.println(database1.hashCode());*/
+
+        /*
+        // implement clone in parent
+        Database database = Database.getDatabase();
+        System.out.println(database.hashCode());
+        Database database1 = (Database) database.clone();
+        System.out.println(database1.hashCode());
+
+        //        Resolve using overriding clone method and throw exception
+
+        */
+
+
+        // implement serialization in parent
+        Database database = Database.getDatabase();
+        System.out.println(database.hashCode());
+        Database database1 = (Database) database.clone();
+        System.out.println(database1.hashCode());
+
+        //        Resolve using overriding clone method and throw exception
+
+
+
+    }
 }
