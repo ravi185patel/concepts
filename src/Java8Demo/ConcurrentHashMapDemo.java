@@ -14,23 +14,23 @@ class EmployeeKey{
     }
 //
     public void setName(String name) {
-        this.name =new String(name);
+        this.name =name;
     }
 
     @Override
     public boolean equals(Object object){
-        if(object instanceof EmployeeKey){
-            if(object == this){
-                EmployeeKey employeeKey=(EmployeeKey) object;
-                return employeeKey.getName().equals(this.getName());
-            }
-        }
-        return false;
+
+        if(this== object) return true;
+        if(object == null || getClass() != object.getClass()) return false; // handel null value
+        return name.equals(((EmployeeKey) object).name);
     }
     @Override
     public int hashCode(){
-        int prime=31;
-        return prime+this.getName().length();
+        if(this.getName() != null){
+            int prime=31;
+            return prime+this.getName().length();
+        }
+        return 1;
     }
 }
 public class ConcurrentHashMapDemo {
@@ -53,6 +53,11 @@ public class ConcurrentHashMapDemo {
         int hash = System.identityHashCode(employeeKey);
         System.out.println(hash);
         System.out.println(hash(employeeKey)+" "+((16-1) & employeeKey.hashCode()));
+
+        EmployeeKey employeeKey1=new EmployeeKey();
+        employeeKey.setName(null); // raise NullPointerException because we have not checked null in equals method
+        hmap.put(employeeKey1,1);
+
     }
     static final int hash(Object key) {
         int h;
