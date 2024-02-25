@@ -13,10 +13,13 @@ class Book {
     
     private String year;
 
-    public Book(String title, String author,String year) {
+    private String city;
+
+    public Book(String title, String author,String year,String city) {
         this.title = title;
         this.author = author;
         this.year = year;
+        this.city = city;
     }
 
     public String getTitle() {
@@ -35,11 +38,31 @@ class Book {
         this.year = year;
     }
 
-    @Override
-    public String toString() {
-        return "Book [title=" + title + ", author=" + author +", year="+ year +"]";
+    public void setTitle(String title) {
+        this.title = title;
     }
 
+    public void setAuthor(String author) {
+        this.author = author;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    @Override
+    public String toString() {
+        return "Book{" +
+                "title='" + title + '\'' +
+                ", author='" + author + '\'' +
+                ", year='" + year + '\'' +
+                ", city='" + city + '\'' +
+                '}';
+    }
 }
 public class StreamDemo {
     public static void main(String[] args) {
@@ -94,14 +117,16 @@ public class StreamDemo {
         System.out.println(mapc);
 
 
+        // grouping by
+
         List<Book> books = new ArrayList<>();
 
-        books.add(new Book("Java", "James Gosling","2000"));
-        books.add(new Book("C++", "Bjourn Stroustup","2000"));
-        books.add(new Book("C", "Denish Ritche","2000"));
-        books.add(new Book("Database", "C J Date","2001"));
-        books.add(new Book("Java", "James Gosling","2000"));
-        books.add(new Book("C", "Yashavant Kanetkar","2001"));
+        books.add(new Book("Java", "James Gosling","2000","Mumbai"));
+        books.add(new Book("C++", "Bjourn Stroustup","2000","Mumbai"));
+        books.add(new Book("C", "Denish Ritche","2000","Surat"));
+        books.add(new Book("Database", "C J Date","2001","Surat"));
+        books.add(new Book("Java", "James Gosling","2000","Valsad"));
+        books.add(new Book("C", "Yashavant Kanetkar","2001","Valsad"));
 
         Map<String, List<Book>> bookMap = books.stream().collect(Collectors.groupingBy(Book::getTitle));
 
@@ -117,5 +142,22 @@ public class StreamDemo {
 
         Map<String, Map<String, Long>> bookMapS = books.stream().collect(Collectors.groupingBy(Book::getYear,Collectors.groupingBy(Book::getTitle,Collectors.counting())));
         System.out.println(bookMapS.toString());
+
+
+        Map<String,Map<String,List<String>>> bookMap1 = books
+                .stream()
+                .collect(
+                        Collectors.groupingBy(Book::getCity
+                                ,Collectors.groupingBy(Book::getAuthor
+                                        ,Collectors.mapping(Book::getTitle,Collectors.toList()))));
+        System.out.println(bookMap1);
+
+
+        // partition by
+        Map<Boolean,List<String>> bookMap2 = books
+                .stream()
+                .collect(Collectors.partitioningBy(book->book.getCity().equalsIgnoreCase("mumbai"),Collectors.mapping(book -> book.getTitle(),Collectors.toList()))); //
+        System.out.println(bookMap2);
+
     }
 }
