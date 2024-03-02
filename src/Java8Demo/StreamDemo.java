@@ -1,11 +1,55 @@
 package Java8Demo;
 
-import java.util.ArrayList;
-import java.util.List;
+import javax.xml.namespace.QName;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
-import java.util.Map;
+
+
+class Course{
+    private String name;
+
+    public Course(String name) {
+        this.name = name;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    @Override
+    public String toString() {
+        return "Course{" +
+                "name='" + name + '\'' +
+                '}';
+    }
+}
+class Student{
+    private String name;
+    private List<Course> courses;
+
+    public Student(String name, List<Course> courses) {
+        this.name = name;
+        this.courses = courses;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public List<Course> getCourses() {
+        return courses;
+    }
+
+    @Override
+    public String toString() {
+        return "Student{" +
+                "name='" + name + '\'' +
+                ", courses=" + courses +
+                '}';
+    }
+}
 
 class Book {
     private String title;
@@ -158,6 +202,64 @@ public class StreamDemo {
                 .stream()
                 .collect(Collectors.partitioningBy(book->book.getCity().equalsIgnoreCase("mumbai"),Collectors.mapping(book -> book.getTitle(),Collectors.toList()))); //
         System.out.println(bookMap2);
+
+
+        //
+        Student student = new Student("ravi", Arrays.asList(new Course("java"),new Course("c"),new Course("c++")));
+        Student student1 = new Student("ravi1", Arrays.asList(new Course("java")));
+        Student student2 = new Student("ravi2", Arrays.asList(new Course("c"),new Course("c++")));
+
+        List<Student> students= Arrays.asList(student,student1,student2);
+
+        Map<Course,List<Student>> hmap = new HashMap<>();
+        for(Student stu: students){
+            for(Course course:stu.getCourses()){
+                if(hmap.containsKey(course)){
+                    hmap.get(course).add(student);
+                }else{
+                    List<Student> list=new ArrayList<>();
+                    list.add(stu);
+                    hmap.put(course,list);
+                }
+            }
+        }
+
+        System.out.println(hmap);
+
+//        students.stream().map(stu -> Collectors.mapping(stu.getCourses(),Collectors.toList())).collect(Collectors.toList());
+//
+////        List<>
+////
+////        System.out.println(studentList);
+//
+//        List<Integer> list1 = Arrays.asList(1,2,3);
+//        List<Integer> list2 = Arrays.asList(4,5,6);
+//        List<Integer> list3 = Arrays.asList(7,8,9);
+//
+//        List<List<Integer>> listOfLists = Arrays.asList(list1, list2, list3);
+//
+//        List<Integer> listOfAllIntegers = listOfLists.stream()
+//                .flatMap(x -> x.stream())
+//                .collect(Collectors.toList());
+//
+//        System.out.println(listOfAllIntegers);
+//
+//        List<Course> cour = students
+//                .stream()
+//                .map(stu -> stu.getCourses()
+//                        .stream()
+//                        .map(course -> stu)
+//                        .collect(Collectors.toList())
+//                )
+//                .flatMap(Collection::stream)
+//                .collect(Collectors.groupingBy(course -> course.getName(),Collectors.toList()))
+//                .keySet()
+//                .stream()
+////                .collect(Collectors.groupingBy(courses ->))
+//                ;
+
+//        System.out.println(cour);
+
 
     }
 }
