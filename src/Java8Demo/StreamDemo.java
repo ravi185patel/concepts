@@ -10,12 +10,26 @@ import java.util.stream.Stream;
 class Course{
     private String name;
 
+    private List<Student> students;
+
     public Course(String name) {
         this.name = name;
     }
 
     public String getName() {
         return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public List<Student> getStudents() {
+        return students;
+    }
+
+    public void setStudents(List<Student> students) {
+        this.students = students;
     }
 
     @Override
@@ -25,7 +39,7 @@ class Course{
                 '}';
     }
 }
-class Student{
+final class Student{
     private String name;
     private List<Course> courses;
 
@@ -40,6 +54,10 @@ class Student{
 
     public List<Course> getCourses() {
         return courses;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     @Override
@@ -184,7 +202,8 @@ public class StreamDemo {
 
         System.out.println(lst.toString());
 
-        Map<String, Map<String, Long>> bookMapS = books.stream().collect(Collectors.groupingBy(Book::getYear,Collectors.groupingBy(Book::getTitle,Collectors.counting())));
+        Map<String, Map<String, Long>> bookMapS = books.stream()
+                .collect(Collectors.groupingBy(Book::getYear,Collectors.groupingBy(Book::getTitle,Collectors.counting())));
         System.out.println(bookMapS.toString());
 
 
@@ -225,6 +244,20 @@ public class StreamDemo {
         }
 
         System.out.println(hmap);
+
+//        students
+//                .stream()
+//                .map(s1-> {
+////                    Map<Course,Student> hmap1=new HashMap<>();
+//                    for(Course c1:s1.getCourses() ){
+////                        hmap1.put(c1,s1);
+//                        c1.getStudents().add(s1);
+//                    }
+//                    return s1.getCourses();
+//                })
+//                .collect(Collectors.groupingBy(course -> course.ge)
+//                ;
+
 
 //        students.stream().map(stu -> Collectors.mapping(stu.getCourses(),Collectors.toList())).collect(Collectors.toList());
 //

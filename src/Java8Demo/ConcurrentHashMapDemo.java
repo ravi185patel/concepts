@@ -20,8 +20,9 @@ class EmployeeKey{
     @Override
     public boolean equals(Object object){
 
-        if(this== object) return true;
+        if(this == object) return true;
         if(object == null || getClass() != object.getClass()) return false; // handel null value
+        System.out.println("in equals "+name+" : "+((EmployeeKey) object).name);
         return name.equals(((EmployeeKey) object).name);
     }
     @Override
@@ -42,21 +43,25 @@ public class ConcurrentHashMapDemo {
         EmployeeKey employeeKey=new EmployeeKey();
         employeeKey.setName("ravi");
         hmap.put(employeeKey,1);
+
         System.out.println(employeeKey);
         System.out.println(hmap.get(employeeKey));
 //        employeeKey=new EmployeeKey("ravid");
-        employeeKey.setName("rdpk");
-        System.out.println(hmap.keySet().iterator().next().getName());
-        System.out.println(employeeKey);
-        System.out.println(hmap.get(employeeKey));
-        System.out.println(1 >>> 16);
-        int hash = System.identityHashCode(employeeKey);
-        System.out.println(hash);
-        System.out.println(hash(employeeKey)+" "+((16-1) & employeeKey.hashCode()));
 
-        EmployeeKey employeeKey1=new EmployeeKey();
-        employeeKey.setName(null); // raise NullPointerException because we have not checked null in equals method
-        hmap.put(employeeKey1,1);
+        employeeKey.setName("rdpk");
+        hmap.put(employeeKey,10);
+        System.out.println(hmap);
+//        System.out.println(hmap.keySet().iterator().next().getName());
+//        System.out.println(employeeKey);
+        System.out.println(hmap.get(employeeKey));
+//        System.out.println(1 >>> 16);
+//        int hash = System.identityHashCode(employeeKey);
+//        System.out.println(hash);
+//        System.out.println(hash(employeeKey)+" "+((16-1) & employeeKey.hashCode()));
+
+//        EmployeeKey employeeKey1=new EmployeeKey();
+//        employeeKey.setName(null); // raise NullPointerException because we have not checked null in equals method
+//        hmap.put(employeeKey1,1);
 
     }
     static final int hash(Object key) {
