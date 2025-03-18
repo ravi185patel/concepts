@@ -1,4 +1,4 @@
-package Java8Demo;
+package Java8Demo.stream;
 
 import java.util.ArrayList;
 import java.util.List;
