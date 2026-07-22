@@ -1,7 +1,5 @@
-package ConcurrencyPkg.implementationdemo;
+package ConcurrencyPkg.threadprogramming;
 
-import java.util.concurrent.locks.Condition;
-import java.util.concurrent.locks.ReentrantLock;
 import java.util.function.Predicate;
 import java.util.stream.IntStream;
 

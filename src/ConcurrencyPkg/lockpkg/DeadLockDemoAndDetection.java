@@ -1,4 +1,4 @@
-package ConcurrencyPkg;
+package ConcurrencyPkg.lockpkg;
 
 import java.lang.management.ManagementFactory;
 import java.lang.management.ThreadInfo;

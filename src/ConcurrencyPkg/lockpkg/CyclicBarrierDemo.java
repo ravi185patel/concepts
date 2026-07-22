@@ -1,4 +1,4 @@
-package ConcurrencyPkg;
+package ConcurrencyPkg.lockpkg;
 
 import java.util.concurrent.BrokenBarrierException;
 import java.util.concurrent.CyclicBarrier;

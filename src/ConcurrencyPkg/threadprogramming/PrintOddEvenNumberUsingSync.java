@@ -1,4 +1,4 @@
-package ConcurrencyPkg.implementationdemo;
+package ConcurrencyPkg.threadprogramming;
 
 public class PrintOddEvenNumberUsingSync{
 	

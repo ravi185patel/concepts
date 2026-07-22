@@ -1,4 +1,4 @@
-package ConcurrencyPkg;
+package ConcurrencyPkg.lockpkg;
 
 import java.util.LinkedList;
 import java.util.Queue;

@@ -1,4 +1,4 @@
-package ConcurrencyPkg.implementationdemo;
+package ConcurrencyPkg.threadprogramming;
 
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.ReentrantLock;
