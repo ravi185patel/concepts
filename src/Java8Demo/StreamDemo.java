@@ -6,6 +6,31 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
+class Department {
+    String name;
+
+    Department(String name) {
+        this.name = name;
+    }
+
+    public String getName() {
+        return name;
+    }
+}
+
+class Doctor {
+    String name;
+    Department department;
+
+    Doctor(String name, Department department) {
+        this.name = name;
+        this.department = department;
+    }
+
+    public Department getDepartment() {
+        return department;
+    }
+}
 
 class Course{
     private String name;

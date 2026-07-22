@@ -1,0 +1,12 @@
+Policy	            Handles Overload By...	            Risk / Tradeoff
+AbortPolicy         Throwing                         Caller must explicitly catch or handle failure.
+                    RejectedExecutionException
+
+CallerRunsPolicy     Forcing submitting thread       Creates backpressure;
+                     to run task                     can stall response time if caller is an HTTP/UI thread.
+
+DiscardPolicy        Silently dropping incoming task Data loss without log or failure feedback.
+
+DiscardOldestPolicy  Dropping head of queue         Older queued tasks are sacrificed for fresh ones.
+                     and retrying
+
